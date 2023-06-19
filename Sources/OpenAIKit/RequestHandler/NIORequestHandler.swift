@@ -14,6 +14,7 @@ struct NIORequestHandler: RequestHandler {
         configuration: Configuration,
         decoder: JSONDecoder = JSONDecoder()
     ) {
+        //print("FIREBASE: Initializing NIO Request")
         self.httpClient = httpClient
         self.configuration = configuration
         self.decoder = decoder
@@ -23,8 +24,10 @@ struct NIORequestHandler: RequestHandler {
         var headers = configuration.headers
         
         headers.add(contentsOf: request.headers)
+        print("FIREBASE NIO Request Headers: \(headers)")
         
         let url = try generateURL(for: request)
+        print("FIREBASE NIO URL: \(url)")
         
         let body: HTTPClient.Body? = {
             guard let data = request.body else { return nil }

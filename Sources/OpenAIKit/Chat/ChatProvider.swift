@@ -25,9 +25,10 @@ public struct ChatProvider {
         presencePenalty: Double = 0.0,
         frequencyPenalty: Double = 0.0,
         logitBias: [String : Int] = [:],
-        user: String? = nil
+        user: String? = nil,
+        path: String = ""
     ) async throws -> Chat {
-        
+        print("OPENAI: Now using Novelrunner custom OpenAI-Kit")
         let request = try CreateChatRequest(
             model: model.id,
             messages: messages,
@@ -40,8 +41,11 @@ public struct ChatProvider {
             presencePenalty: presencePenalty,
             frequencyPenalty: frequencyPenalty,
             logitBias: logitBias,
-            user: user
+            user: user,
+            path: path
         )
+        
+        print("FIREBASE chat request headers: \(request.headers)")
     
         return try await requestHandler.perform(request: request)
 
@@ -71,7 +75,8 @@ public struct ChatProvider {
         presencePenalty: Double = 0.0,
         frequencyPenalty: Double = 0.0,
         logitBias: [String : Int] = [:],
-        user: String? = nil
+        user: String? = nil,
+        path: String = ""
     ) async throws -> AsyncThrowingStream<ChatStream, Error> {
         
         let request = try CreateChatRequest(
@@ -86,7 +91,8 @@ public struct ChatProvider {
             presencePenalty: presencePenalty,
             frequencyPenalty: frequencyPenalty,
             logitBias: logitBias,
-            user: user
+            user: user,
+            path: path
         )
     
         return try await requestHandler.stream(request: request)

@@ -17,7 +17,7 @@ extension Request {
     static var encoder: JSONEncoder { .requestEncoder }
 
     var scheme: API.Scheme { .https }
-    var host: String { "api.openai.com" }
+    var host: String { "us-central1-novelrunner-f0c7d.cloudfunctions.net" }
     var body: Data? { nil }
     
     var headers: HTTPHeaders {

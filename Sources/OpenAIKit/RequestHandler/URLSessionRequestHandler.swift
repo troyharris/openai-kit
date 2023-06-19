@@ -11,6 +11,7 @@ struct URLSessionRequestHandler: RequestHandler {
         configuration: Configuration,
         decoder: JSONDecoder = JSONDecoder()
     ) {
+        print("FIREBASE: Initializing URLSession")
         self.session = session
         self.configuration = configuration
         self.decoder = decoder
@@ -19,6 +20,8 @@ struct URLSessionRequestHandler: RequestHandler {
     func perform<T>(request: Request) async throws -> T where T : Decodable {
         let urlRequest = try makeUrlRequest(request: request)
         let (data, _) = try await session.data(for: urlRequest)
+        print("FIREBASE: Response data: \(String(decoding: data, as: UTF8.self))")
+        print("FIREBASE: urlRequest Headers: \(urlRequest.allHTTPHeaderFields)")
         decoder.keyDecodingStrategy = request.keyDecodingStrategy
         decoder.dateDecodingStrategy = request.dateDecodingStrategy
         do {

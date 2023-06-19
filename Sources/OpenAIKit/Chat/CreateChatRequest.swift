@@ -4,7 +4,8 @@ import Foundation
 
 struct CreateChatRequest: Request {
     let method: HTTPMethod = .POST
-    let path = "/v1/chat/completions"
+    // let path = "/defaultOpenAIRequest"
+    var path: String
     let body: Data?
     
     init(
@@ -19,7 +20,8 @@ struct CreateChatRequest: Request {
         presencePenalty: Double,
         frequencyPenalty: Double,
         logitBias: [String: Int],
-        user: String?
+        user: String?,
+        path: String
     ) throws {
         
         let body = Body(
@@ -36,8 +38,9 @@ struct CreateChatRequest: Request {
             logitBias: logitBias,
             user: user
         )
-                
+        print("Response body: \(body)")
         self.body = try Self.encoder.encode(body)
+        self.path = path
     }
 }
 

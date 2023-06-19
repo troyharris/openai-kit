@@ -4,6 +4,10 @@
 
 OpenAIKit is a Swift package used to communicate with the [OpenAI API](https://beta.openai.com/docs/api-reference/introduction).
 
+## Custom Code for Novelrunner App
+
+⚠️ This is a custom implentation of Openai-Kit for the app "Novelrunner". You probably want the original package: https://github.com/dylanshine/openai-kit.git
+
 ## Setup
 Add the dependency to Package.swift:
 
